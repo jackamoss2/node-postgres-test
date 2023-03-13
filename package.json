@@ -1,0 +1,23 @@
+{
+  "name": "postgres-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackamoss2/node-postgres-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackamoss2/node-postgres-test/issues"
+  },
+  "homepage": "https://github.com/jackamoss2/node-postgres-test#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.10.0"
+  }
+}
