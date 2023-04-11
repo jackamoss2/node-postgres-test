@@ -1,9 +1,10 @@
 const Pool = require('pg').Pool
-const pool = new Pool({
-  host: process.env.PSQL_HOST,
-  user: process.env.PSQL_USER,
-  password: process.env.PSQL_PASSWORD,
+const pool = new Pool({ 
+    host: process.env.PSQL_HOST,
+    user: process.env.PSQL_USER,
+    password: process.env.PSQL_PASSWORD,
 //   database: process.env.PSQL_DATABASE,
+    port: process.env.PSQL_PORT
 });
 
 const getUsers = (request, response) => {
@@ -27,9 +28,9 @@ const getUserById = (request, response) => {
 }
 
 const createUser = (request, response) => {
-    const { name, email } = request.body
+    const { name, email, password } = request.body
   
-    pool.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *', [name, email], (error, results) => {
+    pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *', [name, email, password], (error, results) => {
         if (error) {
             throw error
         }
@@ -39,11 +40,11 @@ const createUser = (request, response) => {
 
 const updateUser = (request, response) => {
     const id = parseInt(request.params.id)
-    const { name, email } = request.body
+    const { name, email, password } = request.body
   
     pool.query(
-        'UPDATE users SET name = $1, email = $2 WHERE id = $3',
-        [name, email, id],
+        'UPDATE users SET name = $1, email = $2, password =$3 WHERE id = $4',
+        [name, email, password, id],
         (error, results) => {
             if (error) {
             throw error
