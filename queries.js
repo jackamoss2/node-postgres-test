@@ -1,3 +1,6 @@
+var corsAttr = new EnableCorsAttribute("*", "*", "*");
+config.EnableCors(corsAttr);
+
 const Pool = require('pg').Pool
 const pool = new Pool({ 
     host: process.env.PSQL_HOST,
@@ -12,7 +15,7 @@ const getUsers = (request, response) => {
         if (error) {
             throw error
         }
-        response.AppendHeader("Access-Control-Allow-Origin", "*").status(200).json(results.rows)
+        response.status(200).json(results.rows)
     });
 }
 
@@ -34,7 +37,7 @@ const createUser = (request, response) => {
         if (error) {
             throw error
         }
-        response.status(201).AppendHeader("Access-Control-Allow-Origin", "*").send(`User added with ID: ${results.rows[0].id}`)
+        response.status(201).send(`User added with ID: ${results.rows[0].id}`)
     });
 }
 
