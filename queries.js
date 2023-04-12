@@ -1,6 +1,3 @@
-var corsAttr = new EnableCorsAttribute("*", "*", "*");
-config.EnableCors(corsAttr);
-
 const Pool = require('pg').Pool
 const pool = new Pool({ 
     host: process.env.PSQL_HOST,

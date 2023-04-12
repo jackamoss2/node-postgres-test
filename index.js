@@ -1,10 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./queries')
+const cors = require('cors');
 
 const app = express();
 const port = 8080;
 
+app.use(cors({
+    origin: "*"
+}));
 app.use(bodyParser.json());
 app.use(
     bodyParser.urlencoded({
