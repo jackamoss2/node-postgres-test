@@ -12,7 +12,7 @@ const getUsers = (request, response) => {
         if (error) {
             throw error
         }
-        response.status(200).json(results.rows)
+        response.AppendHeader("Access-Control-Allow-Origin", "*").status(200).json(results.rows)
     });
 }
 
