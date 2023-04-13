@@ -28,23 +28,24 @@ const getUserById = (request, response) => {
 }
 
 const createUser = (request, response) => {
-    const { name, email, password } = request.body
+    const { email, password } = request.body
   
-    pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *', [name, email, password], (error, results) => {
+    pool.query('INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *', [email, password], (error, results) => {
         if (error) {
             throw error
         }
+
         response.status(201).send(`User added with ID: ${results.rows[0].id}`)
     });
 }
 
 const updateUser = (request, response) => {
     const id = parseInt(request.params.id)
-    const { name, email, password } = request.body
+    const { email, password } = request.body
   
     pool.query(
-        'UPDATE users SET name = $1, email = $2, password =$3 WHERE id = $4',
-        [name, email, password, id],
+        'UPDATE users SET name = $1, email = $2 WHERE id = $3',
+        [email, password, id],
         (error, results) => {
             if (error) {
             throw error
